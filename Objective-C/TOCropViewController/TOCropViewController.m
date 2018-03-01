@@ -338,9 +338,9 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
     // Adjust for landscape layout
     if (!verticalLayout) {
         x = kTOCropViewControllerTitleTopPadding;
-        if (@available(iOS 11.0, *)) {
-            x += self.view.safeAreaInsets.left;
-        }
+//        if (@available(iOS 11.0, *)) {
+//            x += self.view.safeAreaInsets.left;
+//        }
 
         viewWidth -= x;
     }
@@ -350,12 +350,12 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
     if (!verticalLayout) { frame.origin.x += x; }
 
     // Work out vertical position
-    if (@available(iOS 11.0, *)) {
-        frame.origin.y = self.view.safeAreaInsets.top + kTOCropViewControllerTitleTopPadding;
-    }
-    else {
+//    if (@available(iOS 11.0, *)) {
+//        frame.origin.y = self.view.safeAreaInsets.top + kTOCropViewControllerTitleTopPadding;
+//    }
+//    else {
         frame.origin.y = self.statusBarHeight + kTOCropViewControllerTitleTopPadding;
-    }
+//    }
 
     return frame;
 }
@@ -391,26 +391,26 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
 {
     UIEdgeInsets insets = UIEdgeInsetsZero;
 
-    if (@available(iOS 11.0, *)) {
-        // Add padding to the left in landscape mode
-        if (!self.verticalLayout) {
-            insets.left = self.view.safeAreaInsets.left;
-        }
-        else {
-            // Add padding on top if in vertical and tool bar is at the top
-            if (self.toolbarPosition == TOCropViewControllerToolbarPositionTop) {
-                insets.top = self.view.safeAreaInsets.top;
-            }
-            else { // Add padding to the bottom otherwise
-                insets.bottom = self.view.safeAreaInsets.bottom;
-            }
-        }
-    }
-    else { // iOS <= 10
+//    if (@available(iOS 11.0, *)) {
+//        // Add padding to the left in landscape mode
+//        if (!self.verticalLayout) {
+//            insets.left = self.view.safeAreaInsets.left;
+//        }
+//        else {
+//            // Add padding on top if in vertical and tool bar is at the top
+//            if (self.toolbarPosition == TOCropViewControllerToolbarPositionTop) {
+//                insets.top = self.view.safeAreaInsets.top;
+//            }
+//            else { // Add padding to the bottom otherwise
+//                insets.bottom = self.view.safeAreaInsets.bottom;
+//            }
+//        }
+//    }
+//    else { // iOS <= 10
         if (!self.statusBarHidden && self.toolbarPosition == TOCropViewControllerToolbarPositionTop) {
             insets.top = self.statusBarHeight;
         }
-    }
+//    }
 
     // Update the toolbar with these properties
     self.toolbar.backgroundViewOutsets = insets;
@@ -420,7 +420,7 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
 
 - (void)viewSafeAreaInsetsDidChange
 {
-    [super viewSafeAreaInsetsDidChange];
+   // [super viewSafeAreaInsetsDidChange];
     [self adjustCropViewInsets];
     [self adjustToolbarInsets];
 }
@@ -1239,12 +1239,12 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
     }
 
     CGFloat statusBarHeight = 0.0f;
-    if (@available(iOS 11.0, *)) {
-        statusBarHeight = self.view.safeAreaInsets.top;
-    }
-    else {
+//    if (@available(iOS 11.0, *)) {
+//        statusBarHeight = self.view.safeAreaInsets.top;
+//    }
+//    else {
         statusBarHeight = self.topLayoutGuide.length;
-    }
+//    }
     
     return statusBarHeight;
 }
@@ -1252,18 +1252,18 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
 - (UIEdgeInsets)statusBarSafeInsets
 {
     UIEdgeInsets insets = UIEdgeInsetsZero;
-    if (@available(iOS 11.0, *)) {
-        insets = self.view.safeAreaInsets;
-
-        // Since iPhone X insets are always 44, check if this is merely
-        // accounting for a non-X status bar and cancel it
-        if (insets.top <= 20.0f + FLT_EPSILON) {
-            insets.top = self.statusBarHeight;
-        }
-    }
-    else {
+//    if (@available(iOS 11.0, *)) {
+//        insets = self.view.safeAreaInsets;
+//
+//        // Since iPhone X insets are always 44, check if this is merely
+//        // accounting for a non-X status bar and cancel it
+//        if (insets.top <= 20.0f + FLT_EPSILON) {
+//            insets.top = self.statusBarHeight;
+//        }
+//    }
+//    else {
         insets.top = self.statusBarHeight;
-    }
+//    }
 
     return insets;
 }
